@@ -13,7 +13,7 @@ TaskFlow is a **production-ready, full-stack task management application** built
 
 ### 🎥 Demo Video
 
-- **Project Walkthrough:** https://youtu.be/c2v60XHtdnM
+- **Project Walkthrough:** https://youtu.be/5mFgbFwYYCk
 
 ### 👨‍💻 Developer Information
 
