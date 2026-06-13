@@ -8,7 +8,7 @@ RUN npm ci
 
 COPY . .
 
-ENV NEXT_PUBLIC_API_URL=http://localhost:8080
+ENV NEXT_PUBLIC_API_URL=https://assign-amg8.onrender.com
 
 RUN npm run build
 
