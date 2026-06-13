@@ -8,6 +8,7 @@ import { AuthenticatedRequest } from '../middleware/auth';
 
 const COOKIE_NAME = 'token';
 const COOKIE_MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours
+const IS_PROD = (process.env.NODE_ENV === 'production' || process.env.RENDER === 'true') && process.env.NODE_ENV !== 'test';
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -47,8 +48,8 @@ export const signup = async (req: Request, res: Response) => {
 
     res.cookie(COOKIE_NAME, token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: IS_PROD,
+      sameSite: IS_PROD ? 'none' : 'lax',
       maxAge: COOKIE_MAX_AGE
     });
 
@@ -98,8 +99,8 @@ export const login = async (req: Request, res: Response) => {
 
     res.cookie(COOKIE_NAME, token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: IS_PROD,
+      sameSite: IS_PROD ? 'none' : 'lax',
       maxAge: COOKIE_MAX_AGE
     });
 
@@ -120,8 +121,8 @@ export const login = async (req: Request, res: Response) => {
 export const logout = async (_req: Request, res: Response) => {
   res.clearCookie(COOKIE_NAME, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    secure: IS_PROD,
+    sameSite: IS_PROD ? 'none' : 'lax'
   });
   return res.json({ success: true });
 };
