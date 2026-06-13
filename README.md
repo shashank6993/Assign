@@ -9,7 +9,7 @@ TaskFlow is a **production-ready, full-stack task management application** built
 ### 🚀 Deployed Applications
 
 - **Frontend (Live Application):** https://assign-jade.vercel.app/
-- **Backend API:** https://assign-amg8.onrender.com
+- **Backend Health Endpoint:** https://assign-amg8.onrender.com/health
 
 ### 🎥 Demo Video
 
@@ -22,9 +22,11 @@ TaskFlow is a **production-ready, full-stack task management application** built
 
 ### 📦 Repository
 
-- **GitHub Repository:** `https://github.com/shashank6993/YOUR_REPOSITORY_NAME`
+- **GitHub Repository:** https://github.com/shashank6993/Assign
 
----
+### 🔄 CI/CD Pipeline
+
+- **GitHub Actions:** https://github.com/shashank6993/Assign/actions
 
 ## ✨ Key Features
 
@@ -308,9 +310,9 @@ NEXT_PUBLIC_API_URL=
 ### Clone Repository
 
 ```bash
-git clone https://github.com/shashank6993/YOUR_REPOSITORY_NAME.git
+git clone https://github.com/shashank6993/Assign.git
 
-cd YOUR_REPOSITORY_NAME
+cd Assign
 ```
 
 ### Backend Setup
@@ -412,13 +414,23 @@ Hosted on **Vercel**
 
 https://assign-jade.vercel.app/
 
+---
+
 ### Backend
 
 Hosted on **Render**
 
-https://assign-amg8.onrender.com
+Health Check Endpoint:
+
+https://assign-amg8.onrender.com/health
 
 ---
+
+### Continuous Integration
+
+GitHub Actions Workflow:
+
+https://github.com/shashank6993/Assign/actions
 
 ## ⚖️ Architecture Decisions
 
@@ -467,10 +479,8 @@ https://assign-amg8.onrender.com
 - ✅ Demo Video
 - ✅ Docker Configuration
 - ✅ Automated Tests
-- ✅ CI/CD Workflow
+- ✅ GitHub Actions CI/CD Pipeline
 - ✅ README Documentation
-
----
 
 ## 👨‍💻 Author
 
