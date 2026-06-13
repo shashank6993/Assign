@@ -1,220 +1,484 @@
-# TaskFlow — Real-Time Task Management System
+# 🚀 TaskFlow — Real-Time Task Management System
 
-TaskFlow is a production-ready, real-time, responsive Task Management System built with a Node.js/Express/TypeScript backend and a Next.js/TypeScript frontend.
+TaskFlow is a **production-ready, full-stack task management application** built with **Next.js, Node.js, Express, TypeScript, PostgreSQL, and Prisma ORM**. It provides secure authentication, role-based access control, real-time updates, optimistic UI interactions, activity tracking, file attachments, Docker support, and CI/CD automation.
 
 ---
 
-## 🚀 Key Features
+## 🌐 Live Demo & Submission Links
 
-- **Secure Session Management**: HTTP-only JWT cookies prevent client-side script interception (XSS protection).
-- **Role-Based Authorization**:
-  - **USER**: Can perform CRUD operations only on their own tasks.
-  - **ADMIN**: Can view and manage all user tasks, filter tasks by user, and run full administrative controls.
-- **SSE Real-Time Synchronization**: Instantly broadcast dashboard updates (create, update, delete, complete) to active browser sessions using Server-Sent Events.
-- **Activity Timelines & Audit Logs**: Historical tracking of every task update, status change, creation, or deletion.
-- **File Attachments**: Upload and store PDF/image attachments securely, with size limitations and download links.
-- **Optimistic Updates**: Highly interactive UX that optimistically updates the task state on the frontend with automatic rollback capabilities if API requests fail.
-- **Theme Selection**: Persisted Light/Dark theme switching using Tailwind classes and standard Web Storage.
+### 🚀 Deployed Applications
+
+- **Frontend (Live Application):** https://assign-jade.vercel.app/
+- **Backend API:** https://assign-amg8.onrender.com
+
+### 🎥 Demo Video
+
+- **Project Walkthrough:** https://youtu.be/c2v60XHtdnM
+
+### 👨‍💻 Developer Information
+
+- **LinkedIn:** https://www.linkedin.com/in/shashank-chaudhary3309/
+- **GitHub Profile:** https://github.com/shashank6993
+
+### 📦 Repository
+
+- **GitHub Repository:** `https://github.com/shashank6993/YOUR_REPOSITORY_NAME`
+
+---
+
+## ✨ Key Features
+
+### 🔐 Authentication & Authorization
+
+- JWT-based authentication using **HTTP-only cookies**
+- Password hashing using **bcrypt**
+- Persistent user sessions across page refreshes
+- Protected backend routes
+- Secure logout functionality
+
+### 👥 Role-Based Access Control
+
+#### USER
+- Create, view, update, and delete their own tasks
+- Upload attachments to their tasks
+- View task activity logs
+
+#### ADMIN
+- View and manage tasks across all users
+- Filter tasks by specific users
+- Access all administrative operations
+
+---
+
+## 📋 Task Management Features
+
+- Create tasks
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as completed
+- View task details
+- Responsive task dashboard
+
+Each task supports:
+
+- Title
+- Description
+- Status
+- Priority
+- Due Date
+- Attachments
+- Activity History
+
+---
+
+## 🔎 Search, Filter & Sorting
+
+Task lists support:
+
+### Search
+- Search tasks by title
+
+### Filtering
+- Filter tasks by status:
+  - TODO
+  - IN_PROGRESS
+  - COMPLETED
+
+### Sorting
+Sort tasks by:
+
+- Created Date
+- Due Date
+- Priority
+
+### Pagination
+
+Supports paginated task retrieval with metadata.
+
+---
+
+## ⚡ Real-Time Updates
+
+TaskFlow uses **Server-Sent Events (SSE)** to synchronize task changes across active browser sessions.
+
+Real-time events include:
+
+- Task Created
+- Task Updated
+- Task Deleted
+- Task Completed
+
+---
+
+## 📝 Activity Timeline
+
+Every significant task action is recorded:
+
+- Task Creation
+- Task Updates
+- Status Changes
+- Task Deletion
+- Attachment Uploads
+
+Users can review task history directly from the task details modal.
+
+---
+
+## 📎 File Attachments
+
+Supported attachment types:
+
+- Images
+- PDF Documents
+
+Features:
+
+- Secure upload handling
+- Metadata persistence
+- Download links
+- Attachment listing within task details
+
+---
+
+## 🎨 User Experience Features
+
+- Responsive Design
+- Dark Mode Support
+- Theme Persistence
+- Loading States
+- Empty States
+- Error Handling
+- Toast Notifications
+- Optimistic UI Updates
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Backend
-- **Core**: Node.js & Express.js with TypeScript
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: Custom JWT in HTTP-Only cookies + Bcrypt password hashing
-- **File Upload**: Multer multipart parser
-- **Testing**: Jest & Supertest
-
 ### Frontend
-- **Core**: Next.js 16 (App Router) & React 19 with TypeScript
-- **State Management**: Zustand
-- **Server Cache & Sync**: TanStack Query (React Query)
-- **Forms**: React Hook Form & Zod Resolver
-- **Styling**: Tailwind CSS & Lucide Icons
-- **Testing**: Jest & React Testing Library
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Zustand
+- TanStack Query
+- React Hook Form
+- Zod
+- Lucide Icons
+- Jest
+- React Testing Library
+
+### Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- PostgreSQL
+- Prisma ORM
+- JWT Authentication
+- bcrypt
+- Multer
+- Server-Sent Events (SSE)
+- Jest
+- Supertest
+
+### Infrastructure
+
+- Docker
+- Docker Compose
+- GitHub Actions
+- Render
+- Vercel
 
 ---
 
-## 📁 Project Directory Structure
+## 📁 Project Structure
 
 ```text
+taskflow/
+│
 ├── backend/
+│   ├── prisma/
 │   ├── src/
-│   │   ├── __tests__/       # Integration test suites for auth and tasks
-│   │   ├── handlers/        # Controller logic for auth and tasks
-│   │   ├── middleware/      # Auth validation, upload, and error catchers
-│   │   ├── routes/          # Express route registration
-│   │   ├── sse/             # Real-time Server-Sent Events listener manager
-│   │   ├── utils/           # Prisma client, token utilities
-│   │   └── index.ts         # Main server entrypoint
-│   ├── prisma/              # Prisma schema definition & migration logs
+│   │   ├── __tests__/
+│   │   ├── handlers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── sse/
+│   │   ├── utils/
+│   │   └── index.ts
 │   ├── Dockerfile
 │   └── package.json
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── __tests__/       # Frontend component unit tests
-│   │   ├── app/             # Next.js App Router (login, signup, dashboard, landing page)
-│   │   ├── components/      # Modals, theme toggles, toast containers
-│   │   ├── hooks/           # useSse connection hook
-│   │   ├── providers/       # Auth guard and React Query context providers
-│   │   ├── store/           # Zustand stores for auth, theme, and toast alerts
-│   │   └── utils/           # API fetch client wrapper & Zod schemas
+│   │   ├── __tests__/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── providers/
+│   │   ├── store/
+│   │   └── utils/
 │   ├── Dockerfile
 │   └── package.json
 │
-├── docker-compose.yml       # Production/development orchestrator
+├── docker-compose.yml
+├── .github/workflows/
 └── README.md
 ```
 
 ---
 
-## 🗄️ Database Models
+## 🔌 API Endpoints
 
-```prisma
-model User {
-  id          String        @id @default(uuid())
-  name        String
-  email       String        @unique
-  password    String
-  role        Role          @default(USER)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  tasks       Task[]
-  activityLogs ActivityLog[]
-}
+### Authentication
 
-enum Role {
-  USER
-  ADMIN
-}
+| Method | Endpoint | Description |
+|---------|-----------|-------------|
+| POST | `/api/auth/signup` | Register new user |
+| POST | `/api/auth/login` | Authenticate user |
+| POST | `/api/auth/logout` | Logout user |
+| GET | `/api/auth/me` | Get authenticated user |
 
-model Task {
-  id          String        @id @default(uuid())
-  title       String
-  description String?
-  status      Status        @default(TODO)
-  priority    Priority      @default(MEDIUM)
-  dueDate     DateTime?
-  userId      String
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  attachments Attachment[]
-}
+### Tasks
 
-enum Status {
-  TODO
-  IN_PROGRESS
-  COMPLETED
-}
+| Method | Endpoint |
+|---------|------------|
+| POST | `/api/tasks` |
+| GET | `/api/tasks` |
+| GET | `/api/tasks/:id` |
+| PATCH | `/api/tasks/:id` |
+| DELETE | `/api/tasks/:id` |
 
-enum Priority {
-  LOW
-  MEDIUM
-  HIGH
-}
+Supports:
 
-model Attachment {
-  id        String   @id @default(uuid())
-  fileName  String
-  fileUrl   String
-  mimeType  String
-  taskId    String
-  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-}
+```text
+?page=
+&limit=
+&status=
+&search=
+&sort=
+&order=
+```
 
-model ActivityLog {
-  id        String   @id @default(uuid())
-  taskId    String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  action    String
-  oldValue  Json?
-  newValue  Json?
-  createdAt DateTime @default(now())
-}
+### Activity Logs
+
+| Method | Endpoint |
+|---------|-----------|
+| GET | `/api/tasks/:id/activity` |
+
+### Attachments
+
+| Method | Endpoint |
+|---------|-----------|
+| POST | `/api/tasks/:id/attachments` |
+| GET | `/api/tasks/:id/attachments` |
+
+### Realtime Events
+
+| Method | Endpoint |
+|---------|-----------|
+| GET | `/api/events` |
+
+---
+
+## ⚙️ Environment Variables
+
+### Backend
+
+```env
+PORT=8080
+DATABASE_URL=
+JWT_SECRET=
+UPLOAD_DIR=uploads
+FRONTEND_URL=
+```
+
+### Frontend
+
+```env
+NEXT_PUBLIC_API_URL=
 ```
 
 ---
 
-## ⚡ Setup & Run Instructions
+## 🚀 Local Development Setup
 
-### Prerequisites
-- Node.js (v20 or higher)
-- PostgreSQL (or run via Docker)
-- Docker & Docker Compose (optional)
+### Clone Repository
 
-### Method 1: Using Docker Compose (Recommended)
+```bash
+git clone https://github.com/shashank6993/YOUR_REPOSITORY_NAME.git
 
-1. Clone the repository and navigate to the project root.
-2. Run the following command to start all services (PostgreSQL, Backend Express, and Frontend Next.js):
-   ```bash
-   docker-compose up --build
-   ```
-3. Once running:
-   - Frontend is available at `http://localhost:3000`
-   - Backend API is available at `http://localhost:8080`
-   - PostgreSQL runs on `localhost:5432`
+cd YOUR_REPOSITORY_NAME
+```
 
----
+### Backend Setup
 
-### Method 2: Running Locally (Development Mode)
+```bash
+cd backend
 
-#### 1. Setup Backend:
-1. Navigate to `/backend`.
-2. Create a `.env` file from the environment template:
-   ```env
-   PORT=8080
-   DATABASE_URL="postgresql://postgres:password123@localhost:5432/taskflow?schema=public"
-   JWT_SECRET="your-development-jwt-secret-key"
-   UPLOAD_DIR="uploads"
-   FRONTEND_URL="http://localhost:3000"
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Run migrations and database schema generation:
-   ```bash
-   npm run prisma:migrate
-   npm run prisma:generate
-   ```
-5. Start backend development server:
-   ```bash
-   npm run dev
-   ```
+npm install
 
-#### 2. Setup Frontend:
-1. Navigate to `/frontend`.
-2. Create a `.env` file (if customization is needed):
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:8080
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start frontend development server:
-   ```bash
-   npm run dev
-   ```
+npx prisma migrate dev
+
+npm run dev
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
 
 ---
 
-## 🧪 Running Tests
+## 🐳 Docker Setup
+
+Run the entire application stack using Docker:
+
+```bash
+docker compose up --build
+```
+
+Services:
+
+- Frontend → http://localhost:3000
+- Backend → http://localhost:8080
+- PostgreSQL → localhost:5432
+
+---
+
+## 🧪 Testing
 
 ### Backend Tests
-Integration and unit tests mock the database layer using mock models. Run from the `/backend` directory:
+
 ```bash
-npm run test
+cd backend
+
+npm test
 ```
 
+Tests cover:
+
+- Signup success
+- Login success
+- Unauthorized access
+- Validation failures
+- Ownership enforcement
+- Admin permissions
+- Activity log creation
+
 ### Frontend Tests
-Runs UI component tests using Jest and JSDOM. Run from the `/frontend` directory:
+
 ```bash
-npm run test
+cd frontend
+
+npm test
 ```
+
+Tests cover:
+
+- Login validation
+- Task form validation
+- Task rendering
+- Pagination behavior
+- Optimistic rollback
+- Theme persistence
+
+---
+
+## 🔄 Continuous Integration
+
+GitHub Actions automatically performs:
+
+- Dependency installation
+- Backend testing
+- Frontend testing
+- Backend build validation
+- Frontend build validation
+
+---
+
+## 🚢 Deployment
+
+### Frontend
+
+Hosted on **Vercel**
+
+https://assign-jade.vercel.app/
+
+### Backend
+
+Hosted on **Render**
+
+https://assign-amg8.onrender.com
+
+---
+
+## ⚖️ Architecture Decisions
+
+- Express + TypeScript was selected to provide a familiar and maintainable backend architecture with strong typing support.
+- Prisma ORM simplifies database interactions while maintaining type safety.
+- HTTP-only JWT cookies improve security against XSS attacks.
+- TanStack Query enables efficient server state management and optimistic UI updates.
+- Server-Sent Events provide lightweight real-time synchronization without introducing WebSocket complexity.
+- Docker Compose ensures consistent local development environments.
+
+---
+
+## 🔁 Trade-offs & Assumptions
+
+### Trade-offs
+
+- Local file storage was chosen for attachments instead of cloud providers to simplify deployment.
+- SSE was selected instead of WebSockets due to the application's one-way update requirements.
+- Prisma migrations are expected to be executed during deployment setup.
+
+### Assumptions
+
+- PostgreSQL is available in all deployment environments.
+- Modern browsers supporting EventSource are used.
+- Uploaded files remain within configured size limits.
+
+---
+
+## 🔮 Future Improvements
+
+- Email verification workflows
+- Password reset functionality
+- WebSocket-based collaboration
+- Cloud storage integration (AWS S3 / Cloudinary)
+- Push notifications
+- Advanced analytics dashboard
+- Bulk task operations
+
+---
+
+## 📬 Submission Checklist
+
+- ✅ Source Code Repository
+- ✅ Frontend Deployment
+- ✅ Backend Deployment
+- ✅ Demo Video
+- ✅ Docker Configuration
+- ✅ Automated Tests
+- ✅ CI/CD Workflow
+- ✅ README Documentation
+
+---
+
+## 👨‍💻 Author
+
+### Shashank Chaudhary
+
+- **LinkedIn:** https://www.linkedin.com/in/shashank-chaudhary3309/
+- **GitHub:** https://github.com/shashank6993
+
+---
+
+Thank you for reviewing this submission. I appreciate your time and consideration.
