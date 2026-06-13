@@ -23,7 +23,7 @@ jest.mock('../utils/prisma', () => ({
   }
 }));
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey12345678901234567890';
 
 const generateTestCookie = (userId: string, role = 'USER') => {
   const token = jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: '1h' });
